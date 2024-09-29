@@ -21,7 +21,7 @@ A chord is a series of notes played at the same time. There are two types of cho
 [Major audio]
 [Minor audio]
 
-You can make a major or minor chord out of any note on the scale. For example: C major is composed of the notes C, E, and G, and C munor is composed of the notes C, Eb, and G.
+You can make a major or minor chord out of any note on the scale. For example: C major is composed of the notes C, E, and G, and C minor is composed of the notes C, Eb, and G.
 
 If you assign a number to every note, you can see how these relate to each other:
 
