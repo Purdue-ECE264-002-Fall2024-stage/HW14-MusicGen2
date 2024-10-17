@@ -43,9 +43,9 @@ We are also going to restrict note transitions in a similar fashion. Rather than
 What You Need to Do
 ======================
 
-1. Write the `init_state` function. This should seed the random number generator and
-2. Write the `process_state` function. This should take the current state (note), generate a random number as described below, and then transition to the next note based on the rules described.
-3. Finally, write the `print_state` function, which prints the properly formatted note.
+1. Write the `init_state` function. This should seed the random number generator and initialize your state machine.
+2. Write the `process_state` function. This should take the current states (root note and major/minor), generate a random number as described below, and then transition to the next states.
+3. Finally, write the `print_state` function, which prints the properly formatted notes.
 
 
 The FSM rules are:
@@ -55,7 +55,7 @@ The FSM rules are:
 3. The initial chord should be C major.
 4. The transition from one chord to another is random. The next root note must be one of the notes in the current chord.
 5. Implement random number generation as described below; doing it differently may cause your otherwise working code to not work with the autograder.
-6. Every 8th note should be empty.
+6. Every 8th note should be empty (when i%8=7).
 
 
 When printing a note, you must include whether it is sharp, natural or flat, by appending s, n or b respectively. In order to play a chord, you should put all notes for that chord on the same line. To print a C major chord, you might print something like this:
@@ -72,8 +72,21 @@ When printing an empty note, you must still print a newline on its own. Addition
 ```
 print("\n");
 ```
+An example output would look like this:
 
-If you want to listen to the music your program produces, there is a Python script that will play the song. You can use it by running `make listen` in the assignment directory.
+```
+120
+CnEnGn
+FnAnCn
+
+AnCnEn
+```
+
+This would play C major, F major, a rest, and finally A minor at 120 BPM.
+
+If you want to listen to the music your program produces, there is a Python script that will play the song. You can use it by running `make listen SEED=X` in the assignment directory, where X is a numeric seed of your choice (default 264).
+
+You can also change the speed and length in the file `fsm_macros.h`.
 
 You may have to install pydub for this to work. Run `pip install pydub --user` if it fails.
 
@@ -92,7 +105,8 @@ For instance, if your current chord is C major (C, E, G), your next chord will e
 Random Number Generation
 ==========
 
-Since this assignment uses pseudorandom number generation, in order to ensure consistency between tests, you will need to use a constant seed. This can be found in the file `fsm_macros.h`. When testing against the expected output, you should set `HW13_RAND_SEED` to `264`, which is its default value. You can change this to produce different music.
+
+Since this assignment uses pseudorandom number generation, in order to ensure consistency between tests, you will need to use the same seed and run on the same system. The expected files were generated on Linux using the seed 264. `make test` and `make rand` will use this seed.
 
 Random numbers should be generated using the standard `rand` function. This will generate a very large random number. Generate a random number, modulate by 100, and use that to evaluate the state transition, moving from left to right in the table.
 
