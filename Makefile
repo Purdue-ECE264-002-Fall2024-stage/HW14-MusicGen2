@@ -16,15 +16,15 @@ main: $(OBJS)
 	$(GCC) -c $*.c 
 
 test: main
-	./main > output
+	./main 264 > output
 	diff output expected/expected
 
-test_rand: main #Test your random number generation. Print rand()%100 16 times; if you get the same result, you are doing it correctly.
-	./main > output_rand
+test_rand: main #Test your random number generation. Print rand()%100 15 times; if you get the same result, you are doing it correctly.
+	./main 264 > output_rand
 	diff output_rand expected/expected_rand
 
-listen: main
-	./main > output
+listen: main #run `make listen SEED=x`, where x is a number, to make different music
+	./main $(SEED) > output
 	python3 sound/compile_song.py
 
 clean: # remove all machine generated files, backup files
